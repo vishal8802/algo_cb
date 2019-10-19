@@ -1,16 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
+int s=0,e=0;
+
+void checkSubArray(int i,int j,int a[]){
+    int ones=0,zeros=0;
+    for(int k=i;k<=j;k++){
+        if(a[k]==1) ones++;
+        else zeros++;
+    }
+    if(ones==zeros){
+        s=i;
+        e=j;
+    }
+
+    
+}
 
 int main(){
-    string s;
-    cin>>s;
-    int odd=0,even=0;
-    for(int i=s.length()-1;i>=0;i--){
-        if(i%2==0) even+=s[i]-48;
-        else odd+=s[i]-48;
+    int t,n;
+    cin>>t;
+    while(t--){
+        cin>>n;
+        s=0,e=0;
+        int a[n];
+        for(int i=0;i<n;i++) cin>>a[i];
+        
+        for(int i=0;i<n-1;i++){
+            for(int j=n-1;j>i;j--){
+                checkSubArray(i,j,a);
+                if(e>0) break;
+            }
+        }
+        
+        if(s==0||e==0) cout<<"none";
+        else cout<<s-1<<" "<<e-1<<"\n";
     }
-    if(!(s.length()%2==0)) cout<<even<<endl<<odd;
-    else cout<<odd<<endl<<even;
-    
+
     return 0;
 }
